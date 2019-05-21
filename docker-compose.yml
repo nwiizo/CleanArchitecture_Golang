@@ -1,0 +1,28 @@
+version: '3'
+services:
+  app:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    enviroVnment:
+      MYSQL_ROOT_PASSWORD: rootPassword
+      MYSQL_DATABASE: todoList
+      MYSQL_USER: motomotouchichi
+      MYSQL_PASSWORD: demodemodemodemo
+    restart: always
+
+db:
+    image: mysql:5.7
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sqls/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    restart: always
+    enviroVnment:
+      MYSQL_ROOT_PASSWORD: rootPassword
+      MYSQL_DATABASE: todoList
+      MYSQL_USER: motomotouchichi
+      MYSQL_PASSWORD: demodemodemodemo
